@@ -1,6 +1,8 @@
 package com.example.providence;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,6 +27,29 @@ public class LoginActivity extends Activity {
 		EditText tpassword = (EditText) findViewById(R.id.password);
 		String password = tpassword.getText().toString();
 		
-		startActivity(intent);
+		// attempt login
+		
+		if(username.equals("admin") && password.equals("admin")) {
+			// successful login
+			startActivity(intent);
+		} else {
+			// unsuccessful login
+			
+			// clear password
+			tpassword.setText("");
+			password = "";
+			
+			AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+			alertDialog.setTitle("Login failed");
+			alertDialog.setMessage("The provided information is invalid.");
+			alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Add your code for the button here.
+					dialog.cancel();
+				}
+			});
+			alertDialog.show();
+			// see http://androidsnippets.com/simple-alert-dialog-popup-with-title-message-icon-and-button
+		}
 	}
 }

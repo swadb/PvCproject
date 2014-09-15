@@ -43,6 +43,5 @@
        android:layout_below="@+id/password"
        android:onClick="goToMap"
        android:text="@string/button_login" />
-"
 
 </RelativeLayout>

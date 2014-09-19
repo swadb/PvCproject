@@ -403,8 +403,9 @@ containing a value of this type.
         public static final int ic_plusone_small_off_client=0x7f02001a;
         public static final int ic_plusone_standard_off_client=0x7f02001b;
         public static final int ic_plusone_tall_off_client=0x7f02001c;
-        public static final int powered_by_google_dark=0x7f02001d;
-        public static final int powered_by_google_light=0x7f02001e;
+        public static final int map_pin=0x7f02001d;
+        public static final int powered_by_google_dark=0x7f02001e;
+        public static final int powered_by_google_light=0x7f02001f;
     }
     public static final class id {
         public static final int action_settings=0x7f070018;
@@ -417,6 +418,7 @@ containing a value of this type.
         public static final int holo_dark=0x7f070005;
         public static final int holo_light=0x7f070006;
         public static final int hybrid=0x7f070004;
+        public static final int loginHeader=0x7f070014;
         public static final int map=0x7f070017;
         public static final int match_parent=0x7f07000c;
         public static final int monochrome=0x7f070013;
@@ -429,7 +431,6 @@ containing a value of this type.
         public static final int selectionDetails=0x7f07000b;
         public static final int strict_sandbox=0x7f070009;
         public static final int terrain=0x7f070003;
-        public static final int textView1=0x7f070014;
         public static final int username=0x7f070015;
         public static final int wrap_content=0x7f07000d;
     }
@@ -541,6 +542,7 @@ containing a value of this type.
          */
         public static final int common_signin_button_text_long=0x7f060018;
         public static final int hello_world=0x7f060023;
+        public static final int open_map=0x7f060026;
         public static final int password=0x7f06001c;
         public static final int title_activity_display_message=0x7f060022;
         public static final int title_activity_login=0x7f060025;

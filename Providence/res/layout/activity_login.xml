@@ -9,7 +9,7 @@
     tools:context="com.example.providence.LoginActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/loginHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -20,7 +20,7 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/loginHeader"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="48dp"
         android:ems="10"
@@ -39,9 +39,9 @@
    <Button
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:layout_alignRight="@+id/textView1"
+       android:layout_alignRight="@+id/loginHeader"
        android:layout_below="@+id/password"
-       android:onClick="goToMap"
+       android:onClick="attemptLogin"
        android:text="@string/button_login" />
 
 </RelativeLayout>

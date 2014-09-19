@@ -11,7 +11,8 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_display_message">My Message</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_map">MapActivity</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_map">Providence</string>
+    <string name="title_activity_login">Providence</string>
+    <string name="open_map">Map</string>
 
 </resources>

@@ -14,5 +14,8 @@
     <string name="title_activity_map">Providence</string>
     <string name="title_activity_login">Providence</string>
     <string name="open_map">Map</string>
+    <string name="preference_key">SomethingThatUniquelyIdentifiesMyPreference</string>
+    <string name="user_key">savedUserKey</string>
+    <string name="logout_button">Logout</string>
 
 </resources>

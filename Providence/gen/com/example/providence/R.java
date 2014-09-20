@@ -542,12 +542,15 @@ containing a value of this type.
          */
         public static final int common_signin_button_text_long=0x7f060018;
         public static final int hello_world=0x7f060023;
+        public static final int logout_button=0x7f060029;
         public static final int open_map=0x7f060026;
         public static final int password=0x7f06001c;
+        public static final int preference_key=0x7f060027;
         public static final int title_activity_display_message=0x7f060022;
         public static final int title_activity_login=0x7f060025;
         public static final int title_activity_main=0x7f060021;
         public static final int title_activity_map=0x7f060024;
+        public static final int user_key=0x7f060028;
         public static final int username=0x7f06001b;
         /**  Text on a placeholder buy button when Google Play services is not
          available or up-to-date 

@@ -11,8 +11,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="108dp"
-        android:text="@string/button_login"
-        android:onClick="goToLogin" />
+        android:text="@string/logout_button"
+        android:onClick="logout" />
     
     <Button
         android:layout_width="wrap_content"

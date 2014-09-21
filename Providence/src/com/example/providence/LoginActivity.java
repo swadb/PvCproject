@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,8 +42,7 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
-		SharedPreferences sharedPref = this.getSharedPreferences(
-		        getString(R.string.preference_key), Context.MODE_PRIVATE);
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		String userKey = sharedPref.getString(getString(R.string.user_key), "");
 		if(!userKey.isEmpty()) {
 			Intent intent = new Intent(this, MainActivity.class);
@@ -80,7 +80,7 @@ public class LoginActivity extends Activity {
 				// add post content
 				OutputStream os = urlConnection.getOutputStream();
 				BufferedWriter writer = new BufferedWriter(
-						new OutputStreamWriter(os, "UTF-8"));
+						new OutputStreamWriter(os, "US-ASCII"));
 				writer.write("user="+username+"&password="+password);
 				writer.flush();
 				writer.close();
@@ -102,8 +102,7 @@ public class LoginActivity extends Activity {
 						// login successful!
 						String userKey = responseMap.get("key");
 						
-						SharedPreferences sharedPref = this.getSharedPreferences(
-						        getString(R.string.preference_key), Context.MODE_PRIVATE);
+						SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 						SharedPreferences.Editor editor = sharedPref.edit();
 						editor.putString(getString(R.string.user_key),userKey);
 						editor.commit();
@@ -137,6 +136,10 @@ public class LoginActivity extends Activity {
 			catch(SocketTimeoutException e) {
 				// Request timed out
 				Providence.toast(this, "Request timed out");
+			}
+			catch(IOException e) {
+				// TODO: Handle login error
+				Providence.toast(this, "IO exception..");
 			}
 			catch(Exception e) {
 				// TODO: Handle login error

@@ -1,26 +1,46 @@
-<RelativeLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
     <Button
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="108dp"
-        android:text="@string/logout_button"
-        android:onClick="logout" />
-    
+        android:layout_marginTop="60dp"
+        android:onClick="goToMap"
+        android:text="@string/open_map" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:onClick="forceSetLocation"
+        android:text="@string/force_set_location_button" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/button3"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="188dp"
-        android:text="@string/open_map"
-        android:onClick="goToMap" />
-         
+        android:layout_marginTop="30dp"
+        android:onClick="logout"
+        android:text="@string/logout_button" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button3"
+        android:layout_below="@+id/button1"
+        android:layout_marginTop="30dp"
+        android:onClick="forceGetLocation"
+        android:text="@string/force_get_location_button" />
+
 </RelativeLayout>

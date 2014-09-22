@@ -27,6 +27,9 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		locationClient = new LocationClient(this, this, this);
+		
+		startService(new Intent(this,
+                GPSLoggerService.class));
 	}
 
 	@Override

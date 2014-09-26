@@ -22,5 +22,6 @@
     <string name="logout_button">Logout</string>
     <string name="force_set_location_button">Force set location</string>
     <string name="force_get_location_button">Force get location</string>
+    <string name="service_name">Providence GPS logger</string>
 
 </resources>

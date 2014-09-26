@@ -7,6 +7,8 @@ import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,9 +29,19 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		locationClient = new LocationClient(this, this, this);
-		
+	
 		startService(new Intent(this,
                 GPSLoggerService.class));
+		
+		NotificationManager mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		
+		Notification notification = new Notification.Builder(this).setContentTitle("This is a notification.")
+				.setContentText("Service has started")
+				.setSmallIcon(R.drawable.ic_notification)
+				.build();
+		
+		mNM.notify(R.string.local_service_started, notification);
+		
 	}
 
 	@Override

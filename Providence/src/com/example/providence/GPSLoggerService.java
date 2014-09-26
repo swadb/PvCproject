@@ -36,11 +36,10 @@ public class GPSLoggerService extends Service {
 
 	private LocationManager lm;
 	private LocationListener locationListener;
-	private SQLiteDatabase db;
 	
-	private static long minTimeMillis = 2000;
-	private static long minDistanceMeters = 10;
-	private static float minAccuracyMeters = 35;
+	private static long minTimeMillis = 10000;
+	private static long minDistanceMeters = 5;
+	private static float minAccuracyMeters = 100;
 	
 	private int lastStatus = 0;
 	private static boolean showingDebugToast = false;
@@ -49,7 +48,7 @@ public class GPSLoggerService extends Service {
 
 	/** Called when the activity is first created. */
 	private void startLoggerService() {
-
+		
 		// ---use the LocationManager class to obtain GPS locations---
 		lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -59,6 +58,8 @@ public class GPSLoggerService extends Service {
 				minTimeMillis, 
 				minDistanceMeters,
 				locationListener);
+		
+		
 	}
 
 	private void shutdownLoggerService() {
@@ -67,6 +68,8 @@ public class GPSLoggerService extends Service {
 
 	public class MyLocationListener implements LocationListener {
 		
+		
+		
 		public void onLocationChanged(Location loc) {
 			if (loc != null) {
 				boolean pointIsRecorded = false;
@@ -74,12 +77,20 @@ public class GPSLoggerService extends Service {
 					if (loc.hasAccuracy() && loc.getAccuracy() <= minAccuracyMeters) {
 						String userKey = Providence.getUserKey(getBaseContext());
 						Providence.sendLocation(userKey, loc.getTime(), loc.getLatitude(), loc.getLongitude());
+						
+						//////////////////////////////////////////TEST MESSAGE////////////////////////////////////////////
+						NotificationManager locMsg = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+						Notification notification2 = new Notification.Builder(getBaseContext()).setContentTitle("LOC UPDATED.")
+								.setContentText("location was sent to server.")
+								.setSmallIcon(R.drawable.ic_notification)
+								.build();
+
+						locMsg.notify(R.string.local_service_started, notification2);
+						//////////////////////////////////////////////////////////////////////////////////////////////////
 					} 
 				} catch (Exception e) {
 					Log.e(tag, e.toString());
-				} finally {
-					if (db.isOpen())
-						db.close();
 				}
 				if (pointIsRecorded) {
 					if (showingDebugToast) Toast.makeText(
@@ -139,12 +150,11 @@ public class GPSLoggerService extends Service {
 	public void onCreate() {
 		super.onCreate();
 		mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
+		
 		startLoggerService();
 
 		// Display a notification about us starting. We put an icon in the
 		// status bar.
-	//	showNotification();
 	}
 
 	@Override
@@ -164,29 +174,22 @@ public class GPSLoggerService extends Service {
 	/**
 	 * Show a notification while this service is running.
 	 */
-/**	private void showNotification() {
+	private void showNotification() {
 		// In this sample, we'll use the same text for the ticker and the
 		// expanded notification
 		CharSequence text = getText(R.string.local_service_started);
 
 		// Set the icon, scrolling text and timestamp
-		Notification notification = new Notification(R.drawable.gpslogger16,
-				text, System.currentTimeMillis());
-
-		// The PendingIntent to launch our activity if the user selects this
-		// notification
-		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-				new Intent(this, GPSLoggerService.class), 0);
-
-		// Set the info for the views that show in the notification panel.
-		notification.setLatestEventInfo(this, getText(R.string.service_name),
-				text, contentIntent);
+		Notification notification = new Notification.Builder(this).setContentTitle("This is a notification.")
+										.setContentText("what")
+										.setSmallIcon(R.drawable.ic_notification)
+										.build();
 
 		// Send the notification.
 		// We use a layout id because it is a unique number. We use it later to
 		// cancel.
 		mNM.notify(R.string.local_service_started, notification);
-	} */
+	} 
 
 	// This is the object that receives interactions from clients. See
 	// RemoteService for a more complete example.

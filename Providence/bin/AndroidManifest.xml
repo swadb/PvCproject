@@ -61,6 +61,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.providence.MainActivity" />
         </activity>
+        
+        <service android:name="com.example.providence.GPSLoggerService"
+                        android:permission="android.permission.ACCESS_FINE_LOCATION"
+                        android:label="@string/service_name"
+                        android:exported="true"
+                        android:enabled="true">
+        </service>
 
         <!-- Googe Maps API Key -->
         <meta-data

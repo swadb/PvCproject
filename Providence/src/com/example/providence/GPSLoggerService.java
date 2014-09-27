@@ -1,20 +1,12 @@
 package com.example.providence;
 
-import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.TimeZone;
-
 import com.example.providence.R;
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -32,7 +24,7 @@ public class GPSLoggerService extends Service {
 	public static final String TRIPS_TABLE_NAME = "TRIPS";
 
 	private final DecimalFormat sevenSigDigits = new DecimalFormat("0.#######");
-	private final DateFormat timestampFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+	//private final DateFormat timestampFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 
 	private LocationManager lm;
 	private LocationListener locationListener;
@@ -155,6 +147,7 @@ public class GPSLoggerService extends Service {
 
 		// Display a notification about us starting. We put an icon in the
 		// status bar.
+		showNotification();
 	}
 
 	@Override
@@ -177,11 +170,11 @@ public class GPSLoggerService extends Service {
 	private void showNotification() {
 		// In this sample, we'll use the same text for the ticker and the
 		// expanded notification
-		CharSequence text = getText(R.string.local_service_started);
+		//CharSequence text = getText(R.string.local_service_started);
 
 		// Set the icon, scrolling text and timestamp
-		Notification notification = new Notification.Builder(this).setContentTitle("This is a notification.")
-										.setContentText("what")
+		Notification notification = new Notification.Builder(this).setContentTitle("Providence is watching..")
+										.setContentText("Background Service started.")
 										.setSmallIcon(R.drawable.ic_notification)
 										.build();
 

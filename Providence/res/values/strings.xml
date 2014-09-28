@@ -3,7 +3,6 @@
 
     <string name="local_service_stopped"></string>
     <string name="local_service_started"></string>
-    
     <string name="app_name">Providence</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
@@ -23,5 +22,11 @@
     <string name="force_set_location_button">Force set location</string>
     <string name="force_get_location_button">Force get location</string>
     <string name="service_name">Providence GPS logger</string>
+    <string name="notification_location_sent"></string>
+    <string name="notification_service_started"></string>
+    <string name="notification_location_update_error"></string>
+    <string name="notification_fubar"></string>
+    <string name="title_activity_wifi">Providence</string>
+    <string name="wifi_button">Scan for wifi</string>
 
 </resources>

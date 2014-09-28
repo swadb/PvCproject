@@ -1,32 +1,31 @@
 package com.example.providence;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
+
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
 
 public class LoginActivity extends Activity {
 
+	private ProgressDialog progressDialog;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		
+
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		String userKey = sharedPref.getString(getString(R.string.user_key), "");
 		if(!userKey.isEmpty()) {
@@ -34,73 +33,95 @@ public class LoginActivity extends Activity {
 			startActivity(intent);
 		}
 	}
+	
+	public void onLoginStart() {
+		// spinning ring of progress
+		progressDialog = ProgressDialog.show(LoginActivity.this, "Login", 
+				"Loading. Please wait...", true);
+	}
+	
+	public void onLoginStop() {
+		progressDialog.dismiss();
+	}
 
+	@SuppressWarnings("unchecked")
 	public void attemptLogin(View view) {
-		Intent intent = new Intent(this, MainActivity.class);
-
+		
 		EditText tusername = (EditText) findViewById(R.id.username);
 		String username = tusername.getText().toString();
 
 		EditText tpassword = (EditText) findViewById(R.id.password);
 		String password = tpassword.getText().toString();
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		map.put("user", username);
+		map.put("password", password);
+		
+		AsyncLogin loginTask = new AsyncLogin();
+		loginTask.execute(map);
+	}
+	
 
-		// check for internet connection
+	private class AsyncLogin extends AsyncTask<Map<String, String>, Void, String> {
 
-		if(Providence.hasInternet(this))
-		{
-			// interwebz black maegi
-			StrictMode.ThreadPolicy policy = new StrictMode.
-					ThreadPolicy.Builder().permitAll().build();
-			StrictMode.setThreadPolicy(policy);
-
-			String response;
+		@Override
+		protected void onPreExecute() {
+			LoginActivity.this.onLoginStart();
+		}
+		
+		@Override
+		protected String doInBackground(Map<String, String>... maps) {
+			// for testing async only
+			/*
 			try {
-				// prepare http request
-				URL url = new URL("http://5.56.151.199:8080/login");
-				HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-				urlConnection.setRequestMethod("POST");
-				urlConnection.setDoOutput(true);
-				urlConnection.setDoInput(true);
-				urlConnection.setConnectTimeout(10000);
-				// add post content
-				OutputStream os = urlConnection.getOutputStream();
-				BufferedWriter writer = new BufferedWriter(
-						new OutputStreamWriter(os, "US-ASCII"));
-				writer.write("user="+username+"&password="+password);
-				writer.flush();
-				writer.close();
-				os.close();
+				Thread.sleep(5000); // sleep little thread
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+			}
+			*/
 
-				urlConnection.connect();
+			if(maps[0] == null || maps[0].isEmpty())
+				return null;
 
-				BufferedInputStream in;
-				in = new BufferedInputStream(urlConnection.getInputStream());
-				response = Providence.readStream(in);
-				urlConnection.disconnect();
+			try {
+				URL url = new URL(Providence.loginURL);
+				return Providence.serverRequest(url, maps[0]);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+			}
+			return null;
+		}
 
-				// parse response string
-				HashMap<String, String> responseMap = Providence.urlParamsToKVP(response);
-				if(responseMap!=null) {
-					if(!responseMap.isEmpty() 
-							&& responseMap.get("loggedIn").equals("true")
-							&& responseMap.get("key") != null) {
+		@Override
+		protected void onPostExecute(String response) {
+			LoginActivity.this.onLoginStop();
+			if(response == null) {
+				// TODO login failed
+			}
+			else {
+				HashMap<String, String> kvps = Providence.urlParamsToKVP(response);
+				if(kvps!=null) {
+					if(!kvps.isEmpty() 
+							&& kvps.get("loggedIn").equals("true")
+							&& kvps.get("key") != null) {
 						// login successful!
-						String userKey = responseMap.get("key");
-						
+						String userKey = kvps.get("key");
+
 						SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 						SharedPreferences.Editor editor = sharedPref.edit();
 						editor.putString(getString(R.string.user_key),userKey);
 						editor.commit();
-						
+
+						Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 						startActivity(intent);
 					}
 					else {
 						// incorrect login information
 						// clear password
-						tpassword.setText("");
-						password = "";
+						((EditText) findViewById(R.id.password)).setText("");
 
-						AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+						AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
 						alertDialog.setTitle("Login failed");
 						alertDialog.setMessage("The provided information is invalid.");
 						alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
@@ -113,28 +134,9 @@ public class LoginActivity extends Activity {
 						// see http://androidsnippets.com/simple-alert-dialog-popup-with-title-message-icon-and-button
 					}
 				}
-				else { // response didn't parse properly
-					Providence.toast(this, "Unexpected response");
-				}
-
-			}
-			catch(SocketTimeoutException e) {
-				// Request timed out
-				Providence.toast(this, "Request timed out");
-			}
-			catch(IOException e) {
-				// TODO: Handle login error
-				Providence.toast(this, "IO exception..");
-			}
-			catch(Exception e) {
-				// TODO: Handle login error
-				Providence.toast(this, "Something went wrong..");
 			}
 
 		}
-		else
-		{
-			Providence.toast(this, "No internet connection!");
-		}
+
 	}
 }

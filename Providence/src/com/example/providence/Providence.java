@@ -13,7 +13,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;

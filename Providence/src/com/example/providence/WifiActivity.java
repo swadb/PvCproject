@@ -20,7 +20,6 @@ public class WifiActivity extends Activity {
 	private WifiManager wifiManager;
 	private WifiReceiver wifiReceiver;
     private List<ScanResult> wifiList;
-    private StringBuilder sb = new StringBuilder();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +35,6 @@ public class WifiActivity extends Activity {
 	
 	private class WifiReceiver extends BroadcastReceiver {
         public void onReceive(Context c, Intent intent) {
-        	Providence.toast(c, "Hurray!");
         	wifiList = wifiManager.getScanResults();
         	boolean first = true;
         	String wifiListString = "";
@@ -50,17 +48,6 @@ public class WifiActivity extends Activity {
         		wifiListString += r.SSID;
         	}
         	wifiText.setText(wifiListString);
-        		
-        	/*
-            sb = new StringBuilder();
-            wifiList = wifiManager.getScanResults();
-            for(int i = 0; i < wifiList.size(); i++){
-                sb.append(new Integer(i+1).toString() + ".");
-                sb.append((wifiList.get(i)).toString());
-                sb.append("\\n");
-            }
-            wifiText.setText(sb);
-            */
         }
     }
 	

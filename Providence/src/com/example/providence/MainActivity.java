@@ -66,6 +66,10 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 	}
 
 	public void forceGetLocation(View view) {
+		/*
+		AsyncLocationGet asyncTask = new AsyncLocationGet();
+		asyncTask.execute();
+		*/
 		String userKey = Providence.getUserKey(this);
 		try {
 			Location response = Providence.getLocation(userKey);
@@ -76,6 +80,10 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 	}
 
 	public void forceSetLocation(View view) {
+		/*
+		AsyncLocationSet asyncTask = new AsyncLocationSet();
+		asyncTask.execute();
+		*/
 		String userKey = Providence.getUserKey(this);
 		Location location = locationClient.getLastLocation();
 		try {
@@ -106,4 +114,49 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 		// TODO Auto-generated method stub
 
 	}
+	/*
+	private class AsyncLocationGet extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			String userKey = Providence.getUserKey(MainActivity.this);
+			
+			try {
+				Location response = Providence.getLocation(userKey);
+				Providence.toast(getBaseContext(), "Got Lat: "+response.getLatitude()+" Long: "+response.getLongitude());
+			} catch (IOException e) {
+				Providence.toast(getBaseContext(), "Connection failed");
+			}
+			
+			return null;
+		}
+		
+	}
+	
+	private class AsyncLocationSet extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e1) {
+				// asdasdasd
+			}
+			
+			String userKey = Providence.getUserKey(MainActivity.this);
+			Location location = locationClient.getLastLocation();
+			try {
+				Providence.sendLocation(userKey,
+						location.getTime(), 
+						location.getLatitude(), 
+						location.getLongitude());
+				Providence.toast(MainActivity.this, "Sent Lat: "+location.getLatitude()+" Long: "+location.getLongitude());
+			} catch (IOException e) {
+				Providence.toast(MainActivity.this, "Connection failed");
+			}
+			return null;
+		}
+		
+	}
+	*/
 } 

@@ -1,18 +1,27 @@
 package com.example.providence;
 
+import java.io.IOException;
+import java.util.Map;
+import java.util.Timer;
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.app.Activity;
+import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Toast;
 
 public class MapActivity extends Activity {
 
 	private GoogleMap map;
+	private Timer updateTimer;
+	private Map<String, Marker> markerMap;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,5 +66,22 @@ public class MapActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		initilizeMap();
+	}
+	
+	private class AsyncLocationGet extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			String userKey = Providence.getUserKey(MapActivity.this);
+			
+			try {
+				Location response = Providence.getLocation(userKey);
+			} catch (IOException e) {
+				// TODO some error message
+			}
+			
+			return null;
+		}
+		
 	}
 }

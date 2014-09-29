@@ -11,6 +11,7 @@ import com.google.android.gms.location.LocationRequest;
 import android.app.Service;
 import android.content.Intent;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -22,7 +23,7 @@ OnConnectionFailedListener,
 LocationListener {
 
 	private static float minDistanceMeters = 50;
-	private static float minAccuracyMeters = 1000;
+	private static float minAccuracyMeters = 100;
 
 	private static long requestInterval = 60000;
 	private static long fastestRequestInterval = 10000;
@@ -65,27 +66,11 @@ LocationListener {
 			if(lastSentLocation == null
 					|| distance > loc.getAccuracy()
 					&& distance > minDistanceMeters) { // moved out of accuracy of last location
-				try {
-					Providence.sendLocation(userKey, loc.getTime(), loc.getLatitude(), loc.getLongitude());
-					lastSentLocation = loc;
-					if(showDebugNotification) {
-						Providence.notify(this, "Location updated", "Location sent to server", R.string.notification_location_sent);
-					}
-				} catch (IOException e) {
-					// TODO do something if location wasn't sent
-					if(showDebugNotification) {
-						Providence.notify(this, "Update failed", "Updating location failed", R.string.notification_location_update_error);
-					}
-				}
+				AsyncLocationUpdate asyncTask = new AsyncLocationUpdate();
+				asyncTask.execute(loc);
 			}
 		}
 	}
-
-	
-
-	/**
-	 * Show a notification while this service is running.
-	 */
 
 	// This is the object that receives interactions from clients. See
 	// RemoteService for a more complete example.
@@ -108,7 +93,6 @@ LocationListener {
 
 	@Override
 	public void onConnected(Bundle arg0) {
-		// TODO: The api has location feeds
 		mLocationClient.requestLocationUpdates(mLocationRequest, this);
 		try {
 			lastSentLocation = Providence.getLocation(userKey);
@@ -149,6 +133,27 @@ LocationListener {
 
 	public void onProviderDisabled(String provider) {
 		// TODO Auto-generated method stub
+
+	}
+	
+	private class AsyncLocationUpdate extends AsyncTask<Location, Void, Void> {
+
+		@Override
+		protected Void doInBackground(Location... params) {
+			Location loc = params[0];
+			try {
+				Providence.sendLocation(userKey, loc.getTime(), loc.getLatitude(), loc.getLongitude());
+				lastSentLocation = loc;
+				if(showDebugNotification) {
+					Providence.notify(GPSLoggerService.this, "Location updated", "Location sent to server", R.string.notification_location_sent);
+				}
+			} catch (IOException e) {
+				if(showDebugNotification) {
+					Providence.notify(GPSLoggerService.this, "Update failed", "Updating location failed", R.string.notification_location_update_error);
+				}
+			}
+			return null;
+		}
 
 	}
 

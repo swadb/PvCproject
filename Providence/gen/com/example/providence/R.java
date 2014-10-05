@@ -410,11 +410,12 @@ containing a value of this type.
         public static final int powered_by_google_light=0x7f020021;
     }
     public static final class id {
-        public static final int action_settings=0x7f07001b;
+        public static final int action_settings=0x7f07001f;
         public static final int book_now=0x7f070010;
-        public static final int button1=0x7f070017;
-        public static final int button2=0x7f070019;
-        public static final int button3=0x7f070018;
+        public static final int button1=0x7f07001c;
+        public static final int button4=0x7f07001b;
+        public static final int button5=0x7f07001a;
+        public static final int button6=0x7f070019;
         public static final int buyButton=0x7f07000a;
         public static final int buy_now=0x7f07000f;
         public static final int buy_with_google=0x7f07000e;
@@ -423,38 +424,45 @@ containing a value of this type.
         public static final int holo_dark=0x7f070005;
         public static final int holo_light=0x7f070006;
         public static final int hybrid=0x7f070004;
-        public static final int loginHeader=0x7f070014;
-        public static final int map=0x7f07001a;
+        public static final int list_view=0x7f070015;
+        public static final int loginHeader=0x7f070016;
+        public static final int map=0x7f07001d;
         public static final int match_parent=0x7f07000c;
         public static final int monochrome=0x7f070013;
         public static final int none=0x7f070000;
         public static final int normal=0x7f070001;
-        public static final int password=0x7f070016;
+        public static final int password=0x7f070018;
         public static final int production=0x7f070007;
+        public static final int progressBar1=0x7f070014;
         public static final int sandbox=0x7f070008;
         public static final int satellite=0x7f070002;
         public static final int selectionDetails=0x7f07000b;
         public static final int strict_sandbox=0x7f070009;
         public static final int terrain=0x7f070003;
-        public static final int username=0x7f070015;
+        public static final int text_wifi=0x7f07001e;
+        public static final int username=0x7f070017;
         public static final int wrap_content=0x7f07000d;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f080000;
     }
     public static final class layout {
-        public static final int activity_login=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int activity_map=0x7f030002;
+        public static final int activity_bt=0x7f030000;
+        public static final int activity_login=0x7f030001;
+        public static final int activity_main=0x7f030002;
+        public static final int activity_map=0x7f030003;
+        public static final int activity_wifi=0x7f030004;
     }
     public static final class menu {
-        public static final int login=0x7f0a0000;
-        public static final int main=0x7f0a0001;
-        public static final int map=0x7f0a0002;
+        public static final int bt=0x7f0a0000;
+        public static final int login=0x7f0a0001;
+        public static final int main=0x7f0a0002;
+        public static final int map=0x7f0a0003;
     }
     public static final class string {
         public static final int action_settings=0x7f060022;
         public static final int app_name=0x7f06001c;
+        public static final int bt_button=0x7f060036;
         public static final int button_back=0x7f060020;
         public static final int button_login=0x7f06001f;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
@@ -552,14 +560,20 @@ containing a value of this type.
         public static final int local_service_started=0x7f06001b;
         public static final int local_service_stopped=0x7f06001a;
         public static final int logout_button=0x7f06002b;
+        public static final int notification_fubar=0x7f060032;
+        public static final int notification_location_sent=0x7f06002f;
+        public static final int notification_location_update_error=0x7f060031;
+        public static final int notification_service_started=0x7f060030;
         public static final int open_map=0x7f060028;
         public static final int password=0x7f06001e;
         public static final int preference_key=0x7f060029;
         public static final int service_name=0x7f06002e;
+        public static final int title_activity_bt=0x7f060035;
         public static final int title_activity_display_message=0x7f060024;
         public static final int title_activity_login=0x7f060027;
         public static final int title_activity_main=0x7f060023;
         public static final int title_activity_map=0x7f060026;
+        public static final int title_activity_wifi=0x7f060033;
         public static final int user_key=0x7f06002a;
         public static final int username=0x7f06001d;
         /**  Text on a placeholder buy button when Google Play services is not
@@ -567,6 +581,7 @@ containing a value of this type.
          */
         public static final int wallet_buy_button_place_holder=0x7f060019;
         public static final int welcome=0x7f060021;
+        public static final int wifi_button=0x7f060034;
     }
     public static final class style {
         /** 

@@ -25,8 +25,8 @@ LocationListener {
 	private static float minDistanceMeters = 50;
 	private static float minAccuracyMeters = 100;
 
-	private static long requestInterval = 60000;
-	private static long fastestRequestInterval = 10000;
+	private static long requestInterval = 5*60*1000;
+	private static long fastestRequestInterval = 60*1000;
 	
 	private static int locationSource = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY;
 

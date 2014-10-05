@@ -28,5 +28,7 @@
     <string name="notification_fubar"></string>
     <string name="title_activity_wifi">Providence</string>
     <string name="wifi_button">Scan for wifi</string>
+    <string name="title_activity_bt">BTActivity</string>
+    <string name="bt_button">Scan for Bluetooth</string>
 
 </resources>

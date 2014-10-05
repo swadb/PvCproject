@@ -5,52 +5,63 @@
     tools:context=".MainActivity" >
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:onClick="forceSetLocation"
-        android:text="@string/force_set_location_button" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button3"
-        android:layout_below="@+id/button1"
-        android:layout_marginTop="30dp"
-        android:onClick="forceGetLocation"
-        android:text="@string/force_get_location_button" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:onClick="logout"
+        android:text="@string/logout_button" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button4"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:onClick="goToMap"
-        android:text="@string/open_map" />
+        android:onClick="goToBT"
+        android:text="@string/bt_button" />
 
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_alignLeft="@+id/button5"
+        android:layout_alignRight="@+id/button5"
+        android:layout_below="@+id/button1"
+        android:layout_marginTop="76dp"
         android:onClick="goToWifi"
         android:text="@string/wifi_button" />
 
+  <!--
     <Button
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button4"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:onClick="logout"
-        android:text="@string/logout_button" />
+        android:layout_alignRight="@+id/button5"
+        android:layout_below="@+id/button5"
+        android:onClick="forceGetLocation"
+        android:text="@string/force_get_location_button" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/button2"
+        android:layout_below="@+id/button2"
+        android:onClick="forceSetLocation"
+        android:text="@string/force_set_location_button" />
+-->
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button4"
+        android:layout_alignRight="@+id/button4"
+        android:layout_below="@+id/button6"
+        android:layout_marginTop="85dp"
+        android:onClick="goToMap"
+        android:text="@string/open_map" />
 
 </RelativeLayout>

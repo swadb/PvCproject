@@ -72,15 +72,6 @@ public class LoginActivity extends Activity {
 		
 		@Override
 		protected String doInBackground(Map<String, String>... maps) {
-			// for testing async only
-			/*
-			try {
-				Thread.sleep(5000); // sleep little thread
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-			}
-			*/
-
 			if(maps[0] == null || maps[0].isEmpty())
 				return null;
 
@@ -88,7 +79,7 @@ public class LoginActivity extends Activity {
 				URL url = new URL(Providence.loginURL);
 				return Providence.serverRequest(url, maps[0]);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				// Auto-generated catch block
 			}
 			return null;
 		}
@@ -97,7 +88,7 @@ public class LoginActivity extends Activity {
 		protected void onPostExecute(String response) {
 			LoginActivity.this.onLoginStop();
 			if(response == null) {
-				// TODO login failed
+				// TODO connection failed
 			}
 			else {
 				HashMap<String, String> kvps = Providence.urlParamsToKVP(response);
@@ -108,7 +99,7 @@ public class LoginActivity extends Activity {
 						// login successful!
 						String userKey = kvps.get("key");
 
-						SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+						SharedPreferences sharedPref = Providence.getPreference(LoginActivity.this);
 						SharedPreferences.Editor editor = sharedPref.edit();
 						editor.putString(getString(R.string.user_key),userKey);
 						editor.commit();
@@ -126,7 +117,7 @@ public class LoginActivity extends Activity {
 						alertDialog.setMessage("The provided information is invalid.");
 						alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int which) {
-								// TODO Add your code for the button here.
+								// Add your code for the button here.
 								dialog.cancel();
 							}
 						});
@@ -140,3 +131,7 @@ public class LoginActivity extends Activity {
 
 	}
 }
+
+
+
+//TODO: Strings called from Strings.xml?

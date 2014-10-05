@@ -64,6 +64,11 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 		Intent intent = new Intent(this, WifiActivity.class);
 		startActivity(intent);
 	}
+	
+	public void goToBT(View view) {
+		Intent intent = new Intent(this, BTActivity.class);
+		startActivity(intent);
+	}
 
 	public void forceGetLocation(View view) {
 		/*

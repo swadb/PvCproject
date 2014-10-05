@@ -73,7 +73,7 @@ public class Providence {
 		}
 		return map;
 	}
-
+	
 	public static void toast(Context c, String msg) {
 		int duration = Toast.LENGTH_LONG;
 		Toast toast = Toast.makeText(c, msg, duration);
@@ -104,52 +104,6 @@ public class Providence {
 			loc = null;
 		}
 		return loc;
-		/*
-		StrictMode.ThreadPolicy policy = new StrictMode.
-				ThreadPolicy.Builder().permitAll().build();
-		StrictMode.setThreadPolicy(policy);
-
-		// push current location to server
-		URL url = new URL("http://5.56.151.199:8080/getPos");
-		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-		urlConnection.setRequestMethod("POST");
-		urlConnection.setDoOutput(true);
-		urlConnection.setDoInput(true);
-		urlConnection.setConnectTimeout(10000);
-		// add post content
-		OutputStream os = urlConnection.getOutputStream();
-		BufferedWriter writer = new BufferedWriter(
-				new OutputStreamWriter(os, "US-ASCII"));
-		writer.write("key="+userKey);
-		writer.flush();
-		writer.close();
-		os.close();
-
-		urlConnection.connect();
-
-		BufferedInputStream in;
-		in = new BufferedInputStream(urlConnection.getInputStream());
-		String response = readStream(in);
-		urlConnection.disconnect();
-
-		HashMap<String,String> responseMap = urlParamsToKVP(response);
-		Location loc = new Location("Server");
-		try {
-			loc.setLatitude(
-					Double.parseDouble(
-							responseMap.get("lat")
-							.replace(",", ".")));
-			loc.setLongitude(
-					Double.parseDouble(
-							responseMap.get("long")
-							.replace(",", ".")));
-			return loc;
-		}
-		catch(NullPointerException e) {
-			loc = null;
-			return loc;
-		}
-		*/
 	}
 
 	public static boolean sendLocation(String userKey, long time, double latitude, double longtitude) throws IOException {
@@ -170,7 +124,7 @@ public class Providence {
 	}
 	
 	public static String serverRequest(URL url, Map<String, String> params) throws IOException {
-		// black maegi
+		// black maegi																									//TODO: remove in future?
 		StrictMode.ThreadPolicy policy = new StrictMode.
 				ThreadPolicy.Builder().permitAll().build();
 		StrictMode.setThreadPolicy(policy);
